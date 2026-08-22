@@ -2,4 +2,4 @@
 
 Main: https://plasticmarket.suaveforge.com
 
-Payment Hub: https://payhub.suaveforge.com
+PayHub is a separate project and is not published or modified by this repository.
