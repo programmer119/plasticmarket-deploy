@@ -2,4 +2,4 @@
 
 Main: https://plasticmarket.suaveforge.com
 
-PayHub is a separate project and is not published or modified by this repository.
+Published only after server LOCAL + client public verification passes. PayHub is owned by a separate project and is not modified here.
