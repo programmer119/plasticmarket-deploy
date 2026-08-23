@@ -1,0 +1,32 @@
+import { a as all } from './store-ChUPNIuh.js';
+import { c as catalogProducts } from './catalog-store-DaZoNtDs.js';
+import { r as redirect } from './index.js-CVF8L_zO.js';
+import 'node:fs';
+import 'node:path';
+import './catalog-ZRvm4Oxk.js';
+
+//#region src/routes/collection/+page.server.js
+function load({ locals, url }) {
+	if (!locals.user) throw redirect(303, `/account?next=${encodeURIComponent(url.pathname)}`);
+	const products = catalogProducts();
+	return { entries: all("collection").filter((x) => x.userId === locals.user.id).map((e) => ({
+		entry: e,
+		product: products.find((p) => p.slug === e.product)
+	})).filter((x) => x.product) };
+}
+
+var _page_server = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	load: load
+});
+
+const index = 8;
+let component_cache;
+const component = async () => component_cache ??= (await import('./_page.svelte-BmtInjmH.js')).default;
+const server_id = "src/routes/collection/+page.server.js";
+const imports = ["_app/immutable/nodes/8.CiGcQGVh.js","_app/immutable/chunks/RNp8Ex9K.js","_app/immutable/chunks/xihTtKlq.js","_app/immutable/chunks/BDl0-i39.js","_app/immutable/chunks/A4ix12rb.js"];
+const stylesheets = [];
+const fonts = [];
+
+export { component, fonts, imports, index, _page_server as server, server_id, stylesheets };
+//# sourceMappingURL=8-Dvsg-ckl.js.map
