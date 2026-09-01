@@ -5,9 +5,39 @@ import { fileURLToPath } from 'node:url';
 // since env.js is an entrypoint, `dir` will point to the output directory
 const dir = path.dirname(fileURLToPath(import.meta.url));
 
+const expected = new Set([
+	'SOCKET_PATH',
+	'HOST',
+	'PORT',
+	'ORIGIN',
+	'XFF_DEPTH',
+	'ADDRESS_HEADER',
+	'PROTOCOL_HEADER',
+	'HOST_HEADER',
+	'PORT_HEADER',
+	'BODY_SIZE_LIMIT',
+	'SHUTDOWN_TIMEOUT',
+	'IDLE_TIMEOUT',
+	'KEEP_ALIVE_TIMEOUT',
+	'HEADERS_TIMEOUT'
+]);
+
 const expected_unprefixed = new Set(['LISTEN_PID', 'LISTEN_FDS']);
 
-const env_prefix = "";
+const env_prefix = ENV_PREFIX;
+
+if (env_prefix) {
+	for (const name in process.env) {
+		if (name.startsWith(env_prefix)) {
+			const unprefixed = name.slice(env_prefix.length);
+			if (!expected.has(unprefixed)) {
+				throw new Error(
+					`You should change envPrefix (${env_prefix}) to avoid conflicts with existing environment variables — unexpectedly saw ${name}`
+				);
+			}
+		}
+	}
+}
 
 /**
  * @param {string} name
